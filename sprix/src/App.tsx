@@ -41,7 +41,6 @@ function App() {
       setAvgPace(secondsToTime(paceSeconds));
     }
     
-    // Auto-reset view mode: Short races show all, Long races show summary
     if (distance <= 15) {
       setShowAllSplits(true);
     } else {
@@ -49,14 +48,11 @@ function App() {
     }
   }, [distance, timeStr, strategy]);
 
-  // Screen Logic: What the user sees on the website
   const visibleSplits = (distance > 15 && !showAllSplits)
     ? splits.filter(s => s.isMajorMarker || s.distance === distance)
     : splits;
 
-  // Print Logic: The "Safety Valve"
-  // Max rows that fit on A4 with headers/footers is approx 44.
-  // If the user tries to print >44 rows, we force the "Summary" view to prevent cutoff.
+  // Print Logic: Max rows that fit on A4.
   const MAX_PRINTABLE_ROWS = 44;
   const splitsToPrint = visibleSplits.length > MAX_PRINTABLE_ROWS 
     ? splits.filter(s => s.isMajorMarker || s.distance === distance) 
@@ -173,7 +169,7 @@ function App() {
             className="bg-slate-800 border border-slate-700 rounded-xl p-4 flex flex-col items-center justify-center text-center hover:bg-slate-700 transition-colors group cursor-pointer"
           >
              <Download className="w-6 h-6 text-slate-400 mb-1 group-hover:text-red-500 transition-colors" />
-             <span className="text-slate-400 text-xs uppercase tracking-widest group-hover:text-white transition-colors">Download Kit</span>
+             <span className="text-slate-400 text-xs uppercase tracking-widest group-hover:text-white transition-colors">Download Race Plan</span>
           </button>
         </div>
 
@@ -251,8 +247,8 @@ function App() {
                     </div>
                 </div>
 
-                {/* Band Data */}
-                <div className="text-[11px] font-mono leading-none">
+                {/* Band Data - FIX: Added 'leading-tight' instead of 'leading-none' to prevent cutoff */}
+                <div className="text-[11px] font-mono leading-tight">
                     <div className="grid grid-cols-3 bg-[#e5e7eb] font-bold py-1 border-b border-[#000000] mb-1">
                         <div className="text-center">KM</div>
                         <div className="text-center">PACE</div>
@@ -284,7 +280,7 @@ function App() {
                 <div className="h-1 w-full bg-[#000000] mt-4"></div>
             </div>
 
-            {/* Instructions (Fixed Alignment) */}
+            {/* Instructions */}
             <div className="space-y-4">
                 <h2 className="text-lg font-bold uppercase tracking-wider flex items-center gap-2">
                     <ClipboardList className="w-5 h-5" /> Instructions
