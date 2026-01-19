@@ -41,6 +41,7 @@ function App() {
       setAvgPace(secondsToTime(paceSeconds));
     }
     
+    // Auto-reset view mode
     if (distance <= 15) {
       setShowAllSplits(true);
     } else {
@@ -52,11 +53,15 @@ function App() {
     ? splits.filter(s => s.isMajorMarker || s.distance === distance)
     : splits;
 
-  // Print Logic: Max rows that fit on A4.
-  const MAX_PRINTABLE_ROWS = 44;
-  const splitsToPrint = visibleSplits.length > MAX_PRINTABLE_ROWS 
+  // --- PRINT LOGIC UPDATE ---
+  // Rule: If there are more than 30 splits (e.g. Marathon), force Summary Mode.
+  // This ensures the strip isn't too long to tape around a wrist.
+  // Half Marathon (21 splits) will still show fully.
+  const MAX_WRISTBAND_ROWS = 30;
+  
+  const splitsToPrint = splits.length > MAX_WRISTBAND_ROWS
     ? splits.filter(s => s.isMajorMarker || s.distance === distance) 
-    : visibleSplits;
+    : splits;
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-200 font-sans selection:bg-red-600 selection:text-white flex flex-col">
@@ -247,7 +252,7 @@ function App() {
                     </div>
                 </div>
 
-                {/* Band Data - FIX: Added 'leading-tight' instead of 'leading-none' to prevent cutoff */}
+                {/* Band Data - Uses `leading-tight` to avoid cut-off numbers */}
                 <div className="text-[11px] font-mono leading-tight">
                     <div className="grid grid-cols-3 bg-[#e5e7eb] font-bold py-1 border-b border-[#000000] mb-1">
                         <div className="text-center">KM</div>
