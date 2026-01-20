@@ -103,16 +103,19 @@ function App() {
             <label className="text-xs uppercase tracking-wider text-slate-500 font-semibold flex items-center gap-2">
               <Flag className="w-4 h-4" /> Race Distance
             </label>
-            <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+            {/* UPDATED GRID: Uses 4 columns on small screens, ensuring they fit */}
+            <div className="grid grid-cols-4 gap-2">
               {presets.map((p) => (
                 <button
                   key={p.label}
                   onClick={() => handlePreset(p)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap border ${
-                    distance === p.km ? 'bg-red-600 border-red-600 text-white shadow-lg' : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-white'
+                  className={`py-3 px-1 rounded-lg text-sm font-bold transition-all border ${
+                    distance === p.km
+                      ? 'bg-red-600 border-red-600 text-white shadow-lg scale-105'
+                      : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600 hover:text-white'
                   }`}
                 >
-                  {p.label}
+                   <span className="block truncate">{p.label}</span>
                 </button>
               ))}
             </div>
