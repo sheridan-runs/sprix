@@ -223,15 +223,19 @@ function App() {
         </section>
       </main>
 
-      <footer className="border-t border-slate-800 bg-slate-950 py-8 mt-10">
-        <div className="max-w-2xl mx-auto px-6 text-center space-y-4">
-          <div className="flex items-center justify-center gap-2 text-slate-400">
-             <span className="text-sm">Built by</span>
-             <a href="https://runwith.club" target="_blank" rel="noopener noreferrer" className="text-white font-bold hover:text-red-500 transition-colors flex items-center gap-1">
-               Run With Run Club <ExternalLink className="w-3 h-3" />
-             </a>
-          </div>
-          <p className="text-[10px] text-slate-600 uppercase tracking-widest">© {new Date().getFullYear()} Sprix. Run Fast.</p>
+      {/* Footer Section */}
+      <footer className="py-8 text-center text-slate-500 text-xs uppercase tracking-widest">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-2">
+          <span>
+            Built by <a href="https://sheridanjamieson.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-red-500 transition-colors font-bold">Sheridan Jamieson</a>
+          </span>
+          <span className="hidden md:inline text-slate-700">•</span>
+          <span>
+            For <a href="https://runwith.club" target="_blank" rel="noopener noreferrer" className="text-white hover:text-red-500 transition-colors font-bold">Run With Run Club</a>
+          </span>
+        </div>
+        <div className="mt-2 text-[10px] text-slate-700">
+           &copy; {new Date().getFullYear()} Sprix. Run Fast.
         </div>
       </footer>
 
