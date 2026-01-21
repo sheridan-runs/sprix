@@ -226,6 +226,76 @@ function App() {
         </section>
       </main>
 
+      {/* SEO & FAQ SECTION */}
+<section className="max-w-2xl mx-auto px-6 py-16 space-y-8">
+  <div className="text-center space-y-2">
+    <h2 className="text-2xl font-black text-slate-900">Marathon Strategy 101</h2>
+    <p className="text-slate-500">Don't just run. Race smart.</p>
+  </div>
+  
+  <div className="space-y-4">
+    {/* SEO Q1: Pacing Strategy */}
+    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
+        <span>What is the best marathon pacing strategy?</span>
+        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
+      </summary>
+      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+        For 99% of runners, the best strategy is <strong>Even Splits</strong> (running the same pace for the entire race) or <strong>Negative Splits</strong> (running the second half slightly faster). This conserves glycogen stores for the final 10km. Most Personal Bests (PBs) are set using even pacing.
+      </div>
+    </details>
+
+    {/* SEO Q2: Banking Time */}
+    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
+        <span>Should I "bank time" in the first half?</span>
+        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
+      </summary>
+      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+        <strong>No.</strong> This is the most common mistake first-time marathoners make. "Banking time" usually leads to "bonking" (hitting the wall). For every minute you run too fast in the first half, you will likely lose 2-3 minutes in the second half due to fatigue. Trust the pace band.
+      </div>
+    </details>
+
+    {/* SEO Q3: Hitting the Wall */}
+    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
+        <span>How do I avoid "hitting the wall"?</span>
+        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
+      </summary>
+      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+        "The Wall" typically happens around 30-32km when your body runs out of glycogen (fuel). To avoid it: 
+        <ol className="list-decimal list-inside mt-2 space-y-1">
+          <li><strong>Pace correctly:</strong> Don't start too fast.</li>
+          <li><strong>Fuel early:</strong> Take gels every 30-45 minutes from the start.</li>
+          <li><strong>Hydrate:</strong> Drink at every aid station.</li>
+        </ol>
+      </div>
+    </details>
+
+    {/* SPRIX Q1: Waterproofing */}
+    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
+        <span>How do I waterproof my pace band?</span>
+        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
+      </summary>
+      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+        The cheapest way is clear packing tape. Print your band, lay it flat, and cover both sides completely with wide clear tape. Then cut it out. It becomes sweat-proof and rain-proof instantly.
+      </div>
+    </details>
+
+    {/* SPRIX Q2: Wearing it */}
+    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
+        <span>Where should I wear the band?</span>
+        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
+      </summary>
+      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+        Loop it around your wrist and tape the ends together. Make sure it is loose enough to rotate (so you can read the later splits easily) but tight enough that it won't slide over your hand.
+      </div>
+    </details>
+  </div>
+</section>
+
       {/* Footer Section */}
       <footer className="py-8 text-center text-slate-500 text-xs uppercase tracking-widest">
         <div className="flex flex-col md:flex-row items-center justify-center gap-2">
@@ -342,77 +412,6 @@ function App() {
                     }
                 </p>
             </div>
-
-          {/* SEO & FAQ SECTION */}
-<section className="max-w-2xl mx-auto px-6 py-16 space-y-8">
-  <div className="text-center space-y-2">
-    <h2 className="text-2xl font-black text-slate-900">Marathon Strategy 101</h2>
-    <p className="text-slate-500">Don't just run. Race smart.</p>
-  </div>
-  
-  <div className="space-y-4">
-    {/* SEO Q1: Pacing Strategy */}
-    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
-        <span>What is the best marathon pacing strategy?</span>
-        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
-      </summary>
-      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
-        For 99% of runners, the best strategy is <strong>Even Splits</strong> (running the same pace for the entire race) or <strong>Negative Splits</strong> (running the second half slightly faster). This conserves glycogen stores for the final 10km. Most Personal Bests (PBs) are set using even pacing.
-      </div>
-    </details>
-
-    {/* SEO Q2: Banking Time */}
-    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
-        <span>Should I "bank time" in the first half?</span>
-        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
-      </summary>
-      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
-        <strong>No.</strong> This is the most common mistake first-time marathoners make. "Banking time" usually leads to "bonking" (hitting the wall). For every minute you run too fast in the first half, you will likely lose 2-3 minutes in the second half due to fatigue. Trust the pace band.
-      </div>
-    </details>
-
-    {/* SEO Q3: Hitting the Wall */}
-    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
-        <span>How do I avoid "hitting the wall"?</span>
-        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
-      </summary>
-      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
-        "The Wall" typically happens around 30-32km when your body runs out of glycogen (fuel). To avoid it: 
-        <ol className="list-decimal list-inside mt-2 space-y-1">
-          <li><strong>Pace correctly:</strong> Don't start too fast.</li>
-          <li><strong>Fuel early:</strong> Take gels every 30-45 minutes from the start.</li>
-          <li><strong>Hydrate:</strong> Drink at every aid station.</li>
-        </ol>
-      </div>
-    </details>
-
-    {/* SPRIX Q1: Waterproofing */}
-    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
-        <span>How do I waterproof my pace band?</span>
-        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
-      </summary>
-      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
-        The cheapest way is clear packing tape. Print your band, lay it flat, and cover both sides completely with wide clear tape. Then cut it out. It becomes sweat-proof and rain-proof instantly.
-      </div>
-    </details>
-
-    {/* SPRIX Q2: Wearing it */}
-    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
-        <span>Where should I wear the band?</span>
-        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
-      </summary>
-      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
-        Loop it around your wrist and tape the ends together. Make sure it is loose enough to rotate (so you can read the later splits easily) but tight enough that it won't slide over your hand.
-      </div>
-    </details>
-  </div>
-</section>
-
           
             {/* Footer Branding */}
             <div className="mt-auto pt-10 text-center">
