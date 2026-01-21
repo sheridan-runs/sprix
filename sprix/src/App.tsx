@@ -227,44 +227,44 @@ function App() {
       </main>
 
       {/* SEO & FAQ SECTION */}
-<section className="max-w-2xl mx-auto px-6 py-16 space-y-8">
-  <div className="text-center space-y-2">
-    <h2 className="text-2xl font-black text-slate-900">Marathon Strategy 101</h2>
-    <p className="text-slate-500">Don't just run. Race smart.</p>
+<section className="max-w-2xl mx-auto px-4 py-8 space-y-6">
+  <div className="text-center space-y-2 mb-8">
+    <h2 className="text-xl md:text-2xl font-black text-slate-200">Marathon Strategy 101</h2>
+    <p className="text-slate-400 text-sm">Don't just run. Race smart.</p>
   </div>
   
-  <div className="space-y-4">
-    {/* SEO Q1: Pacing Strategy */}
-    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
+  <div className="space-y-3">
+    {/* Question 1 */}
+    <details className="group bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden w-full transition-all duration-200 open:bg-slate-800">
+      <summary className="flex items-center justify-between p-4 cursor-pointer list-none outline-none focus:outline-none text-slate-200 font-bold hover:text-rose-400 transition-colors">
         <span>What is the best marathon pacing strategy?</span>
-        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
+        <span className="transform group-open:rotate-180 transition-transform text-slate-500">▼</span>
       </summary>
-      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+      <div className="px-4 pb-4 text-slate-400 leading-relaxed text-sm border-t border-slate-700/50 pt-3 mt-1">
         For 99% of runners, the best strategy is <strong>Even Splits</strong> (running the same pace for the entire race) or <strong>Negative Splits</strong> (running the second half slightly faster). This conserves glycogen stores for the final 10km. Most Personal Bests (PBs) are set using even pacing.
       </div>
     </details>
 
-    {/* SEO Q2: Banking Time */}
-    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
+    {/* Question 2 */}
+    <details className="group bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden w-full transition-all duration-200 open:bg-slate-800">
+      <summary className="flex items-center justify-between p-4 cursor-pointer list-none outline-none focus:outline-none text-slate-200 font-bold hover:text-rose-400 transition-colors">
         <span>Should I "bank time" in the first half?</span>
-        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
+        <span className="transform group-open:rotate-180 transition-transform text-slate-500">▼</span>
       </summary>
-      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+      <div className="px-4 pb-4 text-slate-400 leading-relaxed text-sm border-t border-slate-700/50 pt-3 mt-1">
         <strong>No.</strong> This is the most common mistake first-time marathoners make. "Banking time" usually leads to "bonking" (hitting the wall). For every minute you run too fast in the first half, you will likely lose 2-3 minutes in the second half due to fatigue. Trust the pace band.
       </div>
     </details>
 
-    {/* SEO Q3: Hitting the Wall */}
-    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
+    {/* Question 3 */}
+    <details className="group bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden w-full transition-all duration-200 open:bg-slate-800">
+      <summary className="flex items-center justify-between p-4 cursor-pointer list-none outline-none focus:outline-none text-slate-200 font-bold hover:text-rose-400 transition-colors">
         <span>How do I avoid "hitting the wall"?</span>
-        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
+        <span className="transform group-open:rotate-180 transition-transform text-slate-500">▼</span>
       </summary>
-      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+      <div className="px-4 pb-4 text-slate-400 leading-relaxed text-sm border-t border-slate-700/50 pt-3 mt-1">
         "The Wall" typically happens around 30-32km when your body runs out of glycogen (fuel). To avoid it: 
-        <ol className="list-decimal list-inside mt-2 space-y-1">
+        <ol className="list-decimal list-inside mt-2 space-y-1 ml-2">
           <li><strong>Pace correctly:</strong> Don't start too fast.</li>
           <li><strong>Fuel early:</strong> Take gels every 30-45 minutes from the start.</li>
           <li><strong>Hydrate:</strong> Drink at every aid station.</li>
@@ -272,24 +272,24 @@ function App() {
       </div>
     </details>
 
-    {/* SPRIX Q1: Waterproofing */}
-    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
+    {/* Question 4 */}
+    <details className="group bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden w-full transition-all duration-200 open:bg-slate-800">
+      <summary className="flex items-center justify-between p-4 cursor-pointer list-none outline-none focus:outline-none text-slate-200 font-bold hover:text-rose-400 transition-colors">
         <span>How do I waterproof my pace band?</span>
-        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
+        <span className="transform group-open:rotate-180 transition-transform text-slate-500">▼</span>
       </summary>
-      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+      <div className="px-4 pb-4 text-slate-400 leading-relaxed text-sm border-t border-slate-700/50 pt-3 mt-1">
         The cheapest way is clear packing tape. Print your band, lay it flat, and cover both sides completely with wide clear tape. Then cut it out. It becomes sweat-proof and rain-proof instantly.
       </div>
     </details>
 
-    {/* SPRIX Q2: Wearing it */}
-    <details className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-      <summary className="flex items-center justify-between p-4 cursor-pointer select-none font-bold text-slate-700 hover:text-rose-600 transition-colors">
+    {/* Question 5 */}
+    <details className="group bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden w-full transition-all duration-200 open:bg-slate-800">
+      <summary className="flex items-center justify-between p-4 cursor-pointer list-none outline-none focus:outline-none text-slate-200 font-bold hover:text-rose-400 transition-colors">
         <span>Where should I wear the band?</span>
-        <span className="transform group-open:rotate-180 transition-transform text-slate-400">▼</span>
+        <span className="transform group-open:rotate-180 transition-transform text-slate-500">▼</span>
       </summary>
-      <div className="px-4 pb-4 text-slate-600 leading-relaxed text-sm">
+      <div className="px-4 pb-4 text-slate-400 leading-relaxed text-sm border-t border-slate-700/50 pt-3 mt-1">
         Loop it around your wrist and tape the ends together. Make sure it is loose enough to rotate (so you can read the later splits easily) but tight enough that it won't slide over your hand.
       </div>
     </details>
