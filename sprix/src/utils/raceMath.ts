@@ -92,3 +92,18 @@ export const calculateSplits = (
 
   return splits;
 };
+
+// NEW: Helper function to determine when to start the "Kick"
+export const getKickDistance = (distanceKm: number): string => {
+  // Handle Marathons (approx 42km)
+  if (distanceKm >= 42) return "final 10km";
+  
+  // Handle Half Marathons (approx 21km)
+  if (distanceKm >= 21) return "final 5km";
+  
+  // Handle 10k
+  if (distanceKm >= 10) return "final 2km";
+  
+  // Handle 5k and short races
+  return "final 1km";
+};
