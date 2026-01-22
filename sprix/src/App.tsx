@@ -301,7 +301,8 @@ function App() {
       <footer className="py-8 text-center text-slate-500 text-xs uppercase tracking-widest">
         <div className="flex flex-col md:flex-row items-center justify-center gap-2">
           <span>
-            Built by <a href="https://sheridanjamieson.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-red-500 transition-colors font-bold">Sheridan Jamieson</a>
+            {/* UPDATED: Added 'me' to the rel attribute below */}
+            Built by <a href="https://sheridanjamieson.com" target="_blank" rel="me noopener noreferrer" className="text-white hover:text-red-500 transition-colors font-bold">Sheridan Jamieson</a>
           </span>
           <span className="hidden md:inline text-slate-700">•</span>
           <span>
