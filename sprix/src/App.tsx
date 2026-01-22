@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Flag, Timer, Trophy, Download, ChevronDown, ChevronUp, Info, Zap, ExternalLink, Scissors, CheckSquare, ClipboardList } from 'lucide-react';
-import { calculateSplits, secondsToTime, timeToSeconds } from './utils/raceMath';
+import { calculateSplits, secondsToTime, timeToSeconds, getKickDistance } from './utils/raceMath';
 import { downloadPDF } from './utils/pdfGenerator';
 import type { Split as SplitType } from './utils/raceMath';
-import { calculateSplits, secondsToTime, timeToSeconds, getKickDistance } from './utils/raceMath';
 
 function App() {
   // --- State ---
