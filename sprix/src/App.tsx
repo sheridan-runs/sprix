@@ -3,6 +3,7 @@ import { Flag, Timer, Trophy, Download, ChevronDown, ChevronUp, Info, Zap, Exter
 import { calculateSplits, secondsToTime, timeToSeconds } from './utils/raceMath';
 import { downloadPDF } from './utils/pdfGenerator';
 import type { Split as SplitType } from './utils/raceMath';
+import { calculateSplits, secondsToTime, timeToSeconds, getKickDistance } from './utils/raceMath';
 
 function App() {
   // --- State ---
@@ -62,6 +63,7 @@ function App() {
   const splitsToPrint = splits.length > MAX_WRISTBAND_ROWS
     ? splits.filter(s => s.isMajorMarker || s.distance === distance) 
     : splits;
+  const kickText = getKickDistance(distance);
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-200 font-sans selection:bg-red-600 selection:text-white flex flex-col">
@@ -401,17 +403,17 @@ function App() {
             </div>
 
             {/* Strategy */}
-            <div className="bg-[#fef2f2] p-6 rounded-lg border border-[#fee2e2]">
-                <h3 className="text-[#dc2626] font-bold text-lg mb-2 flex items-center gap-2">
-                    <Zap className="w-5 h-5" /> Strategy Note
-                </h3>
-                <p className="text-sm text-[#7f1d1d] leading-relaxed">
-                    {strategy === 'negative' 
-                        ? "You are running a NEGATIVE SPLIT strategy. This means starting conservatively. It will feel 'too slow' at the start—trust the plan. Save your energy for the final 10km where you will overtake fading runners."
-                        : "You are running an EVEN PACE strategy. Consistency is key. Avoid the temptation to sprint the first few kilometers. Lock into your target pace early and hold it as steady as a metronome."
-                    }
-                </p>
-            </div>
+<div className="bg-[#fef2f2] p-6 rounded-lg border border-[#fee2e2]">
+  <h3 className="text-[#dc2626] font-bold text-lg mb-2 flex items-center gap-2">
+    <Zap className="w-5 h-5" /> Strategy Note
+  </h3>
+  <p className="text-sm text-[#7f1d1d] leading-relaxed">
+    {strategy === 'negative' 
+      ? `You are running a NEGATIVE SPLIT strategy. This means starting conservatively. It will feel 'too slow' at the start—trust the plan. Save your energy for the ${kickText} where you will overtake fading runners.`
+      : "You are running an EVEN PACE strategy. Consistency is key. Avoid the temptation to sprint the first few kilometers. Lock into your target pace early and hold it as steady as a metronome."
+    }
+  </p>
+</div>
           
             {/* Footer Branding */}
             <div className="mt-auto pt-10 text-center">
