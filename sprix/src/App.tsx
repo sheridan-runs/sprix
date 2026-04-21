@@ -489,7 +489,7 @@ function App() {
         </div>
       </footer>
 
-      {/* --- RACE DAY KIT (HIDDEN A4 LAYOUT) --- */}
+     {/* --- RACE DAY KIT (HIDDEN A4 LAYOUT) --- */}
       <div 
         id="printable-race-plan" 
         className="fixed -left-[9999px] top-0 w-[794px] min-h-[1123px] bg-[#ffffff] text-[#000000] p-8 flex gap-8"
@@ -497,11 +497,11 @@ function App() {
         {/* COLUMN 1: THE PACE BAND */}
         <div className="w-[30%] flex flex-col">
             <div className="border-2 border-[#000000] border-dashed p-1 flex-grow">
-                {/* Band Header */}
-                <div className="bg-[#000000] text-[#ffffff] p-2 text-center border-b-2 border-[#000000] mb-1">
+                {/* Band Header (Dynamically uses Striders Green) */}
+                <div className={`${isStriders ? 'bg-[#009448]' : 'bg-[#000000]'} text-[#ffffff] p-2 text-center border-b-2 border-[#000000] mb-1`}>
                     <div className="text-3xl font-bold italic tracking-tight leading-none">SPRIX</div>
                     <div className="mt-2 text-xl font-mono font-bold">{timeStr}</div>
-                    <div className="text-[10px] uppercase text-[#9ca3af] tracking-wider mt-1">
+                    <div className="text-[10px] uppercase text-white/70 tracking-wider mt-1">
                         {strategy === 'negative' ? 'Negative Split' : 'Even Pace'}
                     </div>
                 </div>
@@ -534,48 +534,90 @@ function App() {
         <div className="flex-1 space-y-8 pt-4">
             {/* Header */}
             <div>
-                <h1 className="text-5xl font-black italic tracking-tighter text-[#000000]">RACE DAY <span className="text-[#dc2626]">PLAN</span></h1>
+                <h1 className="text-5xl font-black italic tracking-tighter text-[#000000]">
+                    {isStriders ? 'STRIDERS RACE PLAN' : 'RACE DAY PLAN'}
+                </h1>
                 <p className="text-xl text-[#4b5563] mt-2">Target Goal: <span className="font-bold text-[#000000]">{timeStr}</span></p>
-                <div className="h-1 w-full bg-[#000000] mt-4"></div>
+                <div className={`h-1 w-full mt-4 ${isStriders ? 'bg-[#009448]' : 'bg-[#000000]'}`}></div>
             </div>
 
-            {/* Instructions */}
+            {/* EVENT SPECIFIC DATA (Only shows if Striders URL parameter is active) */}
+            {isStriders && (
+                <div className="border-2 border-[#009448] bg-[#f0fdf4] rounded-lg p-6 space-y-4">
+                    <h2 className="text-lg font-bold text-[#009448] uppercase tracking-wider flex items-center gap-2">
+                        <Flag className="w-5 h-5" /> Official Course Details
+                    </h2>
+                    <div className="space-y-3 text-sm text-[#065f46]">
+                        <p className="flex gap-2">
+                            <strong className="w-28 shrink-0 text-[#009448]">Start Time:</strong> 
+                            <span>{
+                                distance === 42.195 ? "8:00 AM (Walkers 7:00 AM)" :
+                                distance === 21.0975 ? "9:30 AM (Walkers 9:00 AM)" :
+                                distance === 10 ? "10:00 AM" :
+                                distance === 5 ? "10:15 AM" : "Check official event guide"
+                            }</span>
+                        </p>
+                        <p className="flex gap-2">
+                            <strong className="w-28 shrink-0 text-[#009448]">Drink Stations:</strong> 
+                            <span>{
+                                distance === 42.195 ? "3.9km, 8.0km, 12.1km, 16.7km, 19.2km, 22.2km, 26.8km, 29.8km, 32.8km, 37.3km, 40.5km" :
+                                distance === 21.0975 ? "3.9km, 8.0km, 12.1km, 16.6km, 19.4km" :
+                                distance === 10 ? "5.5km, 8.3km" :
+                                distance === 5 ? "3.3km" : "Check official event guide"
+                            }</span>
+                        </p>
+                        <p className="flex gap-2">
+                            <strong className="w-28 shrink-0 text-[#009448]">Toilets:</strong> 
+                            <span>{
+                                distance === 42.195 ? "Start/Finish, 8.0km, 14.0km, 16.7km, 19.2km, 20.5km, 26.8km, 32.8km, approx 39.0km" :
+                                distance === 21.0975 ? "Start/Finish, 8.0km, 14.0km, 16.6km, 18.0km" :
+                                distance === 10 ? "Start/Finish, 5.5km, 6.9km" :
+                                distance === 5 ? "Start/Finish" : "Check official event guide"
+                            }</span>
+                        </p>
+                    </div>
+                </div>
+            )}
+
+            {/* Standard Instructions */}
             <div className="space-y-4">
                 <h2 className="text-lg font-bold uppercase tracking-wider flex items-center gap-2">
                     <ClipboardList className="w-5 h-5" /> Instructions
                 </h2>
                 <div className="grid grid-cols-1 gap-4 text-sm text-[#374151]">
                     <div className="flex items-start gap-3">
-                        <div className="w-6 h-6 rounded-full bg-[#000000] text-[#ffffff] flex items-center justify-center font-bold shrink-0 text-xs mt-0.5">1</div>
+                        <div className={`w-6 h-6 rounded-full text-[#ffffff] flex items-center justify-center font-bold shrink-0 text-xs mt-0.5 ${isStriders ? 'bg-[#009448]' : 'bg-[#000000]'}`}>1</div>
                         <p className="leading-tight"><strong>Print & Cut:</strong> Cut out the pace band on the left along the dotted lines. Trim the width if needed to fit your arm.</p>
                     </div>
                     <div className="flex items-start gap-3">
-                        <div className="w-6 h-6 rounded-full bg-[#000000] text-[#ffffff] flex items-center justify-center font-bold shrink-0 text-xs mt-0.5">2</div>
+                        <div className={`w-6 h-6 rounded-full text-[#ffffff] flex items-center justify-center font-bold shrink-0 text-xs mt-0.5 ${isStriders ? 'bg-[#009448]' : 'bg-[#000000]'}`}>2</div>
                         <p className="leading-tight"><strong>Waterproof:</strong> Cover the strip completely with clear packing tape (front and back) to protect it from sweat and rain.</p>
                     </div>
                     <div className="flex items-start gap-3">
-                        <div className="w-6 h-6 rounded-full bg-[#000000] text-[#ffffff] flex items-center justify-center font-bold shrink-0 text-xs mt-0.5">3</div>
+                        <div className={`w-6 h-6 rounded-full text-[#ffffff] flex items-center justify-center font-bold shrink-0 text-xs mt-0.5 ${isStriders ? 'bg-[#009448]' : 'bg-[#000000]'}`}>3</div>
                         <p className="leading-tight"><strong>Wear:</strong> Loop it around your wrist and tape the ends together. Ensure it's loose enough to be comfortable but tight enough not to slip.</p>
                     </div>
                 </div>
             </div>
 
-            {/* Checklist */}
-            <div className="space-y-4">
-                <h2 className="text-lg font-bold uppercase tracking-wider flex items-center gap-2">
-                    <CheckSquare className="w-5 h-5" /> Race Morning Checklist
-                </h2>
-                <div className="border border-[#e5e7eb] rounded-lg p-6 bg-[#f9fafb]">
-                    <div className="grid grid-cols-2 gap-4">
-                        {['Running Shoes (Double Knotted)', 'Race Bib & Safety Pins', 'Timing Chip', 'GPS Watch (Charged)', 'Gels / Nutrition', 'Anti-Chafe Balm', 'Sunscreen / Hat', 'Post-Race Warm Clothes'].map(item => (
-                            <div key={item} className="flex items-center gap-2">
-                                <div className="w-4 h-4 border-2 border-[#d1d5db] rounded shrink-0"></div>
-                                <span className="text-sm text-[#374151]">{item}</span>
-                            </div>
-                        ))}
+            {/* Checklist (Hides if Striders is active to save paper space) */}
+            {!isStriders && (
+                <div className="space-y-4">
+                    <h2 className="text-lg font-bold uppercase tracking-wider flex items-center gap-2">
+                        <CheckSquare className="w-5 h-5" /> Race Morning Checklist
+                    </h2>
+                    <div className="border border-[#e5e7eb] rounded-lg p-6 bg-[#f9fafb]">
+                        <div className="grid grid-cols-2 gap-4">
+                            {['Running Shoes (Double Knotted)', 'Race Bib & Safety Pins', 'Timing Chip', 'GPS Watch (Charged)', 'Gels / Nutrition', 'Anti-Chafe Balm', 'Sunscreen / Hat', 'Post-Race Warm Clothes'].map(item => (
+                                <div key={item} className="flex items-center gap-2">
+                                    <div className="w-4 h-4 border-2 border-[#d1d5db] rounded shrink-0"></div>
+                                    <span className="text-sm text-[#374151]">{item}</span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
 
             {/* Strategy */}
             <div className="bg-[#fef2f2] p-6 rounded-lg border border-[#fee2e2]">
