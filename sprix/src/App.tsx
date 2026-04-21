@@ -5,6 +5,21 @@ import { downloadPDF } from './utils/pdfGenerator';
 import type { Split as SplitType } from './utils/raceMath';
 
 function App() {
+  // --- EVENT CONFIG ---
+  const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
+  const eventId = urlParams.get('event');
+  const isStriders = eventId === 'striders';
+
+  // Dynamic Theme Colors
+  const theme = {
+    bg: isStriders ? 'bg-[#009448]' : 'bg-red-600',
+    text: isStriders ? 'text-[#009448]' : 'text-red-600',
+    textHover: isStriders ? 'hover:text-[#009448]' : 'hover:text-red-600',
+    border: isStriders ? 'border-[#009448]' : 'border-red-600',
+    focusBorder: isStriders ? 'focus:border-[#009448]' : 'focus:border-red-500',
+    bgLight: isStriders ? 'bg-[#009448]/20' : 'bg-red-500/20',
+  };
+
   // --- State ---
   const [distance, setDistance] = useState<number>(42.195);
   
@@ -113,17 +128,35 @@ function App() {
       <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-20">
         <div className="max-w-2xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-red-600 rounded flex items-center justify-center transform -skew-x-12">
-              <Flag className="text-white w-5 h-5" fill="currentColor" />
-            </div>
-            <div>
-              <span className="font-bold text-xl tracking-tight text-white italic block leading-none">SPRIX</span>
-              <span className="text-[10px] text-slate-500 font-mono leading-none block">/spriː/</span>
-            </div>
+            {isStriders ? (
+              <>
+                <img src="/striders-logo.png" alt="Manawatu Striders" className="h-10 object-contain bg-white rounded p-1" />
+                <div className="hidden sm:block border-l border-slate-700 pl-3 ml-1">
+                  <span className="text-[10px] text-slate-500 font-mono leading-none block uppercase">Powered By</span>
+                  <span className="font-bold text-sm tracking-tight text-white italic block leading-none">SPRIX</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className={`w-8 h-8 ${theme.bg} rounded flex items-center justify-center transform -skew-x-12`}>
+                  <Flag className="text-white w-5 h-5" fill="currentColor" />
+                </div>
+                <div>
+                  <span className="font-bold text-xl tracking-tight text-white italic block leading-none">SPRIX</span>
+                  <span className="text-[10px] text-slate-500 font-mono leading-none block">/spriː/</span>
+                </div>
+              </>
+            )}
           </div>
-          {/* Removed Beta Tag, added a placeholder for the future external link */}
-          <div className="hidden sm:block text-xs font-mono text-slate-500">
-            Pace Calculator
+          
+          <div className="text-xs font-mono text-slate-500">
+            {isStriders ? (
+              <a href="https://www.manawatustriders.org.nz/" target="_blank" rel="noopener noreferrer" className={`${theme.textHover} transition-colors flex items-center gap-1`}>
+                Event Info <ExternalLink className="w-3 h-3" />
+              </a>
+            ) : (
+              "Pace Calculator"
+            )}
           </div>
         </div>
       </header>
@@ -132,7 +165,7 @@ function App() {
         {/* HERO */}
         <div className="text-center space-y-4">
           <h1 className="text-4xl md:text-5xl font-black italic tracking-tighter text-white">
-            RACE <span className="text-red-600">SMARTER.</span>
+            RACE <span className={theme.text}>SMARTER.</span>
           </h1>
           
           <p className="text-slate-400 max-w-md mx-auto text-lg leading-relaxed">
@@ -159,7 +192,7 @@ function App() {
                   onClick={() => handlePreset(p)}
                   className={`py-3 px-1 rounded-lg text-sm font-bold transition-all border ${
                     distance === p.km
-                      ? 'bg-red-600 border-red-600 text-white shadow-lg scale-105'
+                      ? `${theme.bg} ${theme.border} text-white shadow-lg scale-105`
                       : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600 hover:text-white'
                   }`}
                 >
@@ -188,7 +221,7 @@ function App() {
   <button
     onClick={() => setInputMode('time')}
     className={`px-4 py-1.5 text-[10px] sm:text-xs font-bold rounded-md transition-all ${
-      inputMode === 'time' ? 'bg-red-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-300'
+      inputMode === 'time' ? `${theme.bg} text-white shadow-md` : 'text-slate-500 hover:text-slate-300'
     }`}
   >
     By Time
@@ -196,7 +229,7 @@ function App() {
   <button
     onClick={() => setInputMode('pace')}
     className={`px-4 py-1.5 text-[10px] sm:text-xs font-bold rounded-md transition-all ${
-      inputMode === 'pace' ? 'bg-red-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-300'
+      inputMode === 'pace' ? `${theme.bg} text-white shadow-md` : 'text-slate-500 hover:text-slate-300'
     }`}
   >
     By Pace
@@ -289,7 +322,7 @@ function App() {
 
         {/* SCREEN DISPLAY */}
         <section className="bg-white text-black rounded-lg shadow-2xl relative flex flex-col">
-          <div className="bg-red-600 text-white p-3 flex justify-between items-center shrink-0 rounded-t-lg z-10">
+          <div className={`${theme.bg} text-white p-3 flex justify-between items-center shrink-0 rounded-t-lg z-10`}>
             <span className="font-bold italic tracking-tight">SPRIX</span>
             <div className="flex items-center gap-4">
                 <span className="font-mono text-sm font-semibold">{timeStr} GOAL</span>
