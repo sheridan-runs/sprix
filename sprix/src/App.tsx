@@ -501,7 +501,7 @@ function App() {
                 <div className={`${isStriders ? 'bg-[#009448]' : 'bg-[#000000]'} text-[#ffffff] p-2 text-center border-b-2 border-[#000000] mb-1`}>
                     <div className="text-3xl font-bold italic tracking-tight leading-none">SPRIX</div>
                     <div className="mt-2 text-xl font-mono font-bold">{timeStr}</div>
-                    <div className="text-[10px] uppercase text-white/70 tracking-wider mt-1">
+                    <div className="text-[10px] uppercase text-[#d1d5db] tracking-wider mt-1">
                         {strategy === 'negative' ? 'Negative Split' : 'Even Pace'}
                     </div>
                 </div>
