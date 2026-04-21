@@ -126,7 +126,7 @@ function App() {
        
       {/* --- Header --- */}
       <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-20">
-        <div className="max-w-2xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             {isStriders ? (
               <>
@@ -161,7 +161,7 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-6 py-10 space-y-10 flex-grow w-full">
+      <main className="max-w-2xl mx-auto px-3 sm:px-6 py-6 sm:py-10 space-y-8 sm:space-y-10 flex-grow w-full">
         {/* HERO */}
         <div className="text-center space-y-4">
           <h1 className="text-4xl md:text-5xl font-black italic tracking-tighter text-white">
@@ -180,7 +180,7 @@ function App() {
         </div>
 
         {/* CONTROLS */}
-        <section className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-6 relative overflow-hidden">
+        <section className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-6 relative overflow-hidden">
           <div className="space-y-3 relative z-0">
             <label className="text-xs uppercase tracking-wider text-slate-500 font-semibold flex items-center gap-2">
               <Flag className="w-4 h-4" /> Race Distance
@@ -366,7 +366,7 @@ function App() {
       </main>
 
       {/* SEO & FAQ SECTION */}
-      <section className="max-w-2xl mx-auto px-4 py-8 space-y-6">
+      <section className="max-w-2xl mx-auto px-3 sm:px-6 py-8 space-y-6">
         <div className="text-center space-y-2 mb-8">
           <h2 className="text-xl md:text-2xl font-black text-slate-200">Marathon Strategy 101</h2>
           <p className="text-slate-400 text-sm">Don't just run. Race smart.</p>
@@ -436,7 +436,7 @@ function App() {
       </section>
 
       {/* --- RACE DIRECTORS CTA --- */}
-      <section className="max-w-2xl mx-auto px-4 pb-12">
+      <section className="max-w-2xl mx-auto px-3 sm:px-6 pb-12">
         <div className="bg-gradient-to-r from-slate-800 to-slate-900 border border-slate-700 rounded-2xl p-6 md:p-8 text-center space-y-4 shadow-xl relative overflow-hidden">
           {/* Subtle background decoration */}
           <div className="absolute -top-6 -right-6 opacity-5 transform rotate-12 pointer-events-none">
