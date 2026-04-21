@@ -218,23 +218,23 @@ function App() {
                 <Timer className="w-4 h-4" /> {inputMode === 'time' ? 'Goal Time' : 'Target Pace'}
               </label>
               <div className="flex p-1 bg-slate-950 rounded-lg border border-slate-700 shrink-0 shadow-inner">
-  <button
-    onClick={() => setInputMode('time')}
-    className={`px-4 py-1.5 text-[10px] sm:text-xs font-bold rounded-md transition-all ${
-      inputMode === 'time' ? `${theme.bg} text-white shadow-md` : 'text-slate-500 hover:text-slate-300'
-    }`}
-  >
-    By Time
-  </button>
-  <button
-    onClick={() => setInputMode('pace')}
-    className={`px-4 py-1.5 text-[10px] sm:text-xs font-bold rounded-md transition-all ${
-      inputMode === 'pace' ? `${theme.bg} text-white shadow-md` : 'text-slate-500 hover:text-slate-300'
-    }`}
-  >
-    By Pace
-  </button>
-</div>
+                <button
+                  onClick={() => setInputMode('time')}
+                  className={`px-4 py-1.5 text-[10px] sm:text-xs font-bold rounded-md transition-all ${
+                    inputMode === 'time' ? `${theme.bg} text-white shadow-md` : 'text-slate-500 hover:text-slate-300'
+                  }`}
+                >
+                  By Time
+                </button>
+                <button
+                  onClick={() => setInputMode('pace')}
+                  className={`px-4 py-1.5 text-[10px] sm:text-xs font-bold rounded-md transition-all ${
+                    inputMode === 'pace' ? `${theme.bg} text-white shadow-md` : 'text-slate-500 hover:text-slate-300'
+                  }`}
+                >
+                  By Pace
+                </button>
+              </div>
             </div>
 
             {/* Dynamic Inputs Based on Toggle */}
