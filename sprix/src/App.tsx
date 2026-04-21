@@ -161,7 +161,7 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-3 sm:px-6 py-6 sm:py-10 space-y-8 sm:space-y-10 flex-grow w-full">
+      <main className="max-w-2xl mx-auto px-2 sm:px-6 py-6 sm:py-10 space-y-8 sm:space-y-10 flex-grow w-full">
         {/* HERO */}
         <div className="text-center space-y-4">
           <h1 className="text-4xl md:text-5xl font-black italic tracking-tighter text-white">
@@ -180,23 +180,23 @@ function App() {
         </div>
 
         {/* CONTROLS */}
-        <section className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-6 relative overflow-hidden">
+        <section className="bg-slate-900 border border-slate-800 rounded-2xl p-3 sm:p-6 shadow-2xl space-y-6 relative overflow-hidden">
           <div className="space-y-3 relative z-0">
             <label className="text-xs uppercase tracking-wider text-slate-500 font-semibold flex items-center gap-2">
               <Flag className="w-4 h-4" /> Race Distance
             </label>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-4 gap-1 sm:gap-2">
               {presets.map((p) => (
                 <button
                   key={p.label}
                   onClick={() => handlePreset(p)}
-                  className={`py-3 px-1 rounded-lg text-sm font-bold transition-all border ${
+                  className={`py-3 px-0 sm:px-1 rounded-lg text-xs sm:text-sm font-bold transition-all border ${
                     distance === p.km
                       ? `${theme.bg} ${theme.border} text-white shadow-lg scale-105`
                       : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600 hover:text-white'
                   }`}
                 >
-                   <span className="block truncate">{p.label}</span>
+                   <span className="block tracking-tight">{p.label}</span>
                 </button>
               ))}
             </div>
