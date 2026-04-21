@@ -402,8 +402,33 @@ function App() {
         </div>
       </section>
 
+      {/* --- RACE DIRECTORS CTA --- */}
+      <section className="max-w-2xl mx-auto px-4 pb-12">
+        <div className="bg-gradient-to-r from-slate-800 to-slate-900 border border-slate-700 rounded-2xl p-6 md:p-8 text-center space-y-4 shadow-xl relative overflow-hidden">
+          {/* Subtle background decoration */}
+          <div className="absolute -top-6 -right-6 opacity-5 transform rotate-12 pointer-events-none">
+            <Flag className="w-32 h-32 text-white" />
+          </div>
+          
+          <h2 className="text-xl md:text-2xl font-black text-white relative z-10">Want Sprix for your event?</h2>
+          <p className="text-slate-400 text-sm md:text-base max-w-md mx-auto relative z-10">
+            Get a custom-branded pace calculator and printable wristbands for your next race. We do the heavy lifting, your runners get the PBs.
+          </p>
+          <div className="pt-2 relative z-10">
+            <a 
+              href="https://tally.so/r/A7bN4z"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-white text-slate-900 px-6 py-3 rounded-full font-bold text-sm hover:bg-slate-200 transition-colors shadow-lg"
+            >
+              Partner With Us
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer Section */}
-      <footer className="py-8 text-center text-slate-500 text-xs uppercase tracking-widest">
+      <footer className="py-8 text-center text-slate-500 text-xs uppercase tracking-widest space-y-3">
         <div className="flex flex-col md:flex-row items-center justify-center gap-2">
           <span>
             Built by <a href="https://sheridanjamieson.com" target="_blank" rel="me noopener noreferrer" className="text-white hover:text-red-500 transition-colors font-bold">Sheridan Jamieson</a>
@@ -413,7 +438,20 @@ function App() {
             For <a href="https://runwith.club" target="_blank" rel="noopener noreferrer" className="text-white hover:text-red-500 transition-colors font-bold">Run With Run Club</a>
           </span>
         </div>
-        <div className="mt-2 text-[10px] text-slate-700">
+        
+        {/* FEEDBACK LINK */}
+        <div>
+          <a 
+            href="https://tally.so/r/7R9OpZ" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-[10px] text-slate-600 hover:text-slate-300 transition-colors lowercase"
+          >
+            got feedback or found a bug? let us know ↗
+          </a>
+        </div>
+
+        <div className="text-[10px] text-slate-700 pt-2">
            &copy; {new Date().getFullYear()} Sprix. Run Fast.
         </div>
       </footer>
