@@ -7,12 +7,21 @@ import type { Split as SplitType } from './utils/raceMath';
 function App() {
   // --- State ---
   const [distance, setDistance] = useState<number>(42.195);
+  
+  // Input Mode Toggle
+  const [inputMode, setInputMode] = useState<'time' | 'pace'>('time');
+
+  // Time State
   const [hours, setHours] = useState(4);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+
+  // Pace State (Defaulted to match 4:00:00 Marathon -> 5:41/km)
+  const [paceMins, setPaceMins] = useState(5);
+  const [paceSecs, setPaceSecs] = useState(41);
+
   const [strategy, setStrategy] = useState<'even' | 'negative'>('even');
   const [splits, setSplits] = useState<SplitType[]>([]);
-  const [avgPace, setAvgPace] = useState<string>('0:00');
   const [showAllSplits, setShowAllSplits] = useState<boolean>(false);
 
   const timeStr = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
@@ -24,22 +33,58 @@ function App() {
     { label: 'Marathon', km: 42.195, defaultTime: { h: 4, m: 0, s: 0 } },
   ];
 
+  // --- Sync Handlers ---
+  const updatePaceFromTime = (d: number, h: number, m: number, s: number) => {
+    if (d <= 0) return;
+    const tSecs = h * 3600 + m * 60 + s;
+    const pSecs = Math.round(tSecs / d);
+    setPaceMins(Math.floor(pSecs / 60));
+    setPaceSecs(pSecs % 60);
+  };
+
+  const updateTimeFromPace = (d: number, pm: number, ps: number) => {
+    if (d <= 0) return;
+    const pSecs = pm * 60 + ps;
+    const tSecs = Math.round(pSecs * d);
+    setHours(Math.floor(tSecs / 3600));
+    setMinutes(Math.floor((tSecs % 3600) / 60));
+    setSeconds(tSecs % 60);
+  };
+
+  const handleDistanceChange = (newDist: number) => {
+    setDistance(newDist);
+    if (inputMode === 'time') {
+      updatePaceFromTime(newDist, hours, minutes, seconds);
+    } else {
+      updateTimeFromPace(newDist, paceMins, paceSecs);
+    }
+  };
+
+  const handleTimeChange = (h: number, m: number, s: number) => {
+    setHours(h);
+    setMinutes(m);
+    setSeconds(s);
+    updatePaceFromTime(distance, h, m, s);
+  };
+
+  const handlePaceChange = (m: number, s: number) => {
+    setPaceMins(m);
+    setPaceSecs(s);
+    updateTimeFromPace(distance, m, s);
+  };
+
   const handlePreset = (preset: typeof presets[0]) => {
     setDistance(preset.km);
     setHours(preset.defaultTime.h);
     setMinutes(preset.defaultTime.m);
     setSeconds(preset.defaultTime.s);
+    updatePaceFromTime(preset.km, preset.defaultTime.h, preset.defaultTime.m, preset.defaultTime.s);
+    setInputMode('time'); // Snap back to time mode for presets
   };
 
   useEffect(() => {
     const calculatedSplits = calculateSplits(distance, timeStr, strategy);
     setSplits(calculatedSplits);
-
-    const totalSeconds = timeToSeconds(timeStr);
-    if (distance > 0 && totalSeconds > 0) {
-      const paceSeconds = totalSeconds / distance;
-      setAvgPace(secondsToTime(paceSeconds));
-    }
     
     // Auto-reset view mode
     if (distance <= 15) {
@@ -54,9 +99,6 @@ function App() {
     : splits;
 
   // --- PRINT LOGIC UPDATE ---
-  // Rule: If there are more than 30 splits (e.g. Marathon), force Summary Mode.
-  // This ensures the strip isn't too long to tape around a wrist.
-  // Half Marathon (21 splits) will still show fully.
   const MAX_WRISTBAND_ROWS = 30;
    
   const splitsToPrint = splits.length > MAX_WRISTBAND_ROWS
@@ -79,7 +121,10 @@ function App() {
               <span className="text-[10px] text-slate-500 font-mono leading-none block">/spriː/</span>
             </div>
           </div>
-          <div className="hidden sm:block text-xs font-mono text-slate-500">BETA v0.3</div>
+          {/* Removed Beta Tag, added a placeholder for the future external link */}
+          <div className="hidden sm:block text-xs font-mono text-slate-500">
+            Pace Calculator
+          </div>
         </div>
       </header>
 
@@ -90,7 +135,6 @@ function App() {
             RACE <span className="text-red-600">SMARTER.</span>
           </h1>
           
-          {/* --- UPDATED SEO TEXT --- */}
           <p className="text-slate-400 max-w-md mx-auto text-lg leading-relaxed">
             The free <strong className="text-slate-200 font-semibold">Marathon Pace Calculator</strong> and <strong className="text-slate-200 font-semibold">Race Band Generator</strong>. 
             Calculate negative splits, visualize your strategy, and print a waterproof wristband for race day.
@@ -108,7 +152,6 @@ function App() {
             <label className="text-xs uppercase tracking-wider text-slate-500 font-semibold flex items-center gap-2">
               <Flag className="w-4 h-4" /> Race Distance
             </label>
-            {/* UPDATED GRID: Uses 4 columns on small screens, ensuring they fit */}
             <div className="grid grid-cols-4 gap-2">
               {presets.map((p) => (
                 <button
@@ -125,31 +168,76 @@ function App() {
               ))}
             </div>
             <div className="relative group">
-              <input type="number" value={distance} onChange={(e) => setDistance(parseFloat(e.target.value) || 0)} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white font-mono text-lg focus:outline-none focus:border-red-500 transition-colors" />
+              <input 
+                type="number" 
+                value={distance || ''} 
+                onChange={(e) => handleDistanceChange(parseFloat(e.target.value) || 0)} 
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white font-mono text-lg focus:outline-none focus:border-red-500 transition-colors" 
+              />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-600 text-sm font-mono pointer-events-none">KM</div>
             </div>
           </div>
 
           <div className="space-y-3 relative z-0">
-            <label className="text-xs uppercase tracking-wider text-slate-500 font-semibold flex items-center gap-2">
-              <Timer className="w-4 h-4" /> Goal Time
-            </label>
-            <div className="flex items-center gap-2">
-               <div className="relative flex-1">
-                 <input type="number" min="0" value={hours} onChange={(e) => setHours(Number(e.target.value))} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-3 text-center text-white font-mono text-lg focus:border-red-500 focus:outline-none" />
-                 <span className="absolute bottom-1 left-0 right-0 text-[8px] text-center text-slate-600 uppercase">Hrs</span>
-               </div>
-               <span className="text-slate-600 font-mono text-xl pb-2">:</span>
-               <div className="relative flex-1">
-                 <input type="number" min="0" max="59" value={minutes} onChange={(e) => setMinutes(Number(e.target.value))} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-3 text-center text-white font-mono text-lg focus:border-red-500 focus:outline-none" />
-                 <span className="absolute bottom-1 left-0 right-0 text-[8px] text-center text-slate-600 uppercase">Mins</span>
-               </div>
-               <span className="text-slate-600 font-mono text-xl pb-2">:</span>
-               <div className="relative flex-1">
-                 <input type="number" min="0" max="59" value={seconds} onChange={(e) => setSeconds(Number(e.target.value))} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-3 text-center text-white font-mono text-lg focus:border-red-500 focus:outline-none" />
-                 <span className="absolute bottom-1 left-0 right-0 text-[8px] text-center text-slate-600 uppercase">Secs</span>
-               </div>
+            {/* Input Mode Toggle & Label */}
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-xs uppercase tracking-wider text-slate-500 font-semibold flex items-center gap-2">
+                <Timer className="w-4 h-4" /> {inputMode === 'time' ? 'Goal Time' : 'Target Pace'}
+              </label>
+              <div className="flex p-1 bg-slate-950 rounded-lg border border-slate-800 shrink-0">
+                <button
+                  onClick={() => setInputMode('time')}
+                  className={`px-3 py-1 text-[10px] sm:text-xs font-bold rounded-md transition-all ${
+                    inputMode === 'time' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'
+                  }`}
+                >
+                  By Time
+                </button>
+                <button
+                  onClick={() => setInputMode('pace')}
+                  className={`px-3 py-1 text-[10px] sm:text-xs font-bold rounded-md transition-all ${
+                    inputMode === 'pace' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'
+                  }`}
+                >
+                  By Pace
+                </button>
+              </div>
             </div>
+
+            {/* Dynamic Inputs Based on Toggle */}
+            {inputMode === 'time' ? (
+              <div className="flex items-center gap-2">
+                 <div className="relative flex-1">
+                   <input type="number" min="0" value={hours} onChange={(e) => handleTimeChange(Number(e.target.value), minutes, seconds)} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-3 text-center text-white font-mono text-lg focus:border-red-500 focus:outline-none" />
+                   <span className="absolute bottom-1 left-0 right-0 text-[8px] text-center text-slate-600 uppercase">Hrs</span>
+                 </div>
+                 <span className="text-slate-600 font-mono text-xl pb-2">:</span>
+                 <div className="relative flex-1">
+                   <input type="number" min="0" max="59" value={minutes} onChange={(e) => handleTimeChange(hours, Number(e.target.value), seconds)} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-3 text-center text-white font-mono text-lg focus:border-red-500 focus:outline-none" />
+                   <span className="absolute bottom-1 left-0 right-0 text-[8px] text-center text-slate-600 uppercase">Mins</span>
+                 </div>
+                 <span className="text-slate-600 font-mono text-xl pb-2">:</span>
+                 <div className="relative flex-1">
+                   <input type="number" min="0" max="59" value={seconds} onChange={(e) => handleTimeChange(hours, minutes, Number(e.target.value))} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-3 text-center text-white font-mono text-lg focus:border-red-500 focus:outline-none" />
+                   <span className="absolute bottom-1 left-0 right-0 text-[8px] text-center text-slate-600 uppercase">Secs</span>
+                 </div>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                 <div className="relative flex-1">
+                   <input type="number" min="0" value={paceMins} onChange={(e) => handlePaceChange(Number(e.target.value), paceSecs)} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-3 text-center text-white font-mono text-lg focus:border-red-500 focus:outline-none" />
+                   <span className="absolute bottom-1 left-0 right-0 text-[8px] text-center text-slate-600 uppercase">Mins</span>
+                 </div>
+                 <span className="text-slate-600 font-mono text-xl pb-2">:</span>
+                 <div className="relative flex-1">
+                   <input type="number" min="0" max="59" value={paceSecs} onChange={(e) => handlePaceChange(paceMins, Number(e.target.value))} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-2 py-3 text-center text-white font-mono text-lg focus:border-red-500 focus:outline-none" />
+                   <span className="absolute bottom-1 left-0 right-0 text-[8px] text-center text-slate-600 uppercase">Secs</span>
+                 </div>
+                 <div className="flex-1 text-slate-500 font-mono text-sm self-center text-center pb-2">
+                   / km
+                 </div>
+              </div>
+            )}
           </div>
 
           <div className="p-4 bg-slate-950/50 rounded-xl border border-slate-800 flex items-center justify-between">
@@ -174,8 +262,21 @@ function App() {
         {/* SUMMARY & DOWNLOAD */}
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col items-center justify-center text-center">
-             <span className="text-slate-500 text-xs uppercase tracking-widest mb-1">Avg Pace</span>
-             <span className="text-2xl font-bold text-white font-mono">{avgPace} <span className="text-sm text-slate-500">/km</span></span>
+             {inputMode === 'time' ? (
+               <>
+                 <span className="text-slate-500 text-xs uppercase tracking-widest mb-1">Avg Pace</span>
+                 <span className="text-2xl font-bold text-white font-mono">
+                   {paceMins}:{paceSecs.toString().padStart(2, '0')} <span className="text-sm text-slate-500">/km</span>
+                 </span>
+               </>
+             ) : (
+               <>
+                 <span className="text-slate-500 text-xs uppercase tracking-widest mb-1">Est. Goal Time</span>
+                 <span className="text-2xl font-bold text-white font-mono">
+                   {hours}:{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+                 </span>
+               </>
+             )}
           </div>
           <button 
             onClick={() => downloadPDF('printable-race-plan', 'sprix-race-kit.pdf')}
@@ -194,13 +295,13 @@ function App() {
                 <span className="font-mono text-sm font-semibold">{timeStr} GOAL</span>
             </div>
           </div>
-           
+            
           <div className="grid grid-cols-3 bg-slate-100 p-2 text-xs font-bold uppercase tracking-wider text-slate-600 border-b border-slate-300 shrink-0">
             <div className="text-center">Dist</div>
             <div className="text-center">Split</div>
             <div className="text-center">Elapsed</div>
           </div>
-           
+            
           <div className={`divide-y divide-slate-200 font-mono text-sm overflow-y-auto transition-all ${showAllSplits ? 'max-h-none' : 'max-h-[400px]'}`}>
             {visibleSplits.map((split) => (
               <div key={split.distance} className={`grid grid-cols-3 py-2 ${split.isMajorMarker ? 'bg-slate-50 font-bold' : ''}`}>
@@ -305,7 +406,6 @@ function App() {
       <footer className="py-8 text-center text-slate-500 text-xs uppercase tracking-widest">
         <div className="flex flex-col md:flex-row items-center justify-center gap-2">
           <span>
-            {/* UPDATED: Added 'me' to the rel attribute below */}
             Built by <a href="https://sheridanjamieson.com" target="_blank" rel="me noopener noreferrer" className="text-white hover:text-red-500 transition-colors font-bold">Sheridan Jamieson</a>
           </span>
           <span className="hidden md:inline text-slate-700">•</span>
@@ -335,7 +435,7 @@ function App() {
                     </div>
                 </div>
 
-                {/* Band Data - Uses `leading-tight` to avoid cut-off numbers */}
+                {/* Band Data */}
                 <div className="text-[11px] font-mono leading-tight">
                     <div className="grid grid-cols-3 bg-[#e5e7eb] font-bold py-1 border-b border-[#000000] mb-1">
                         <div className="text-center">KM</div>
