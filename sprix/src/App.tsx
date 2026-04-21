@@ -130,7 +130,7 @@ function App() {
           <div className="flex items-center gap-2">
             {isStriders ? (
               <>
-                <img src="/striders-logo.png" alt="Manawatu Striders" className="h-10 object-contain bg-white rounded p-1" />
+                <img src="/Manawatu-Striders-logo.png" alt="Manawatu Striders" className="h-10 object-contain bg-white rounded p-1" />
                 <div className="hidden sm:block border-l border-slate-700 pl-3 ml-1">
                   <span className="text-[10px] text-slate-500 font-mono leading-none block uppercase">Powered By</span>
                   <span className="font-bold text-sm tracking-tight text-white italic block leading-none">SPRIX</span>
