@@ -445,7 +445,7 @@ function App() {
             href="https://tally.so/r/7R9OpZ" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-[10px] text-slate-600 hover:text-slate-300 transition-colors lowercase"
+            className="text-[10px] text-slate-400 hover:text-white transition-colors lowercase underline underline-offset-4 decoration-slate-700 hover:decoration-white"
           >
             got feedback or found a bug? let us know ↗
           </a>
