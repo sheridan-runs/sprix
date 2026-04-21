@@ -151,7 +151,7 @@ function App() {
           
           <div className="text-xs font-mono text-slate-500">
             {isStriders ? (
-              <a href="https://www.manawatustriders.org.nz/" target="_blank" rel="noopener noreferrer" className={`${theme.textHover} transition-colors flex items-center gap-1`}>
+              <a href="https://www.manawatustriders.org.nz/full-and-half-marathon" target="_blank" rel="noopener noreferrer" className={`${theme.textHover} transition-colors flex items-center gap-1`}>
                 Event Info <ExternalLink className="w-3 h-3" />
               </a>
             ) : (
