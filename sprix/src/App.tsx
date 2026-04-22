@@ -186,10 +186,18 @@ function App() {
           </p>
 
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs text-slate-400 mt-2">
-            <Info className="w-3 h-3" />
-            <span>Sprix: Like "Prix" in Grand Prix</span>
+            {isStriders ? (
+              <>
+                <Zap className={`w-3 h-3 ${theme.text}`} fill="currentColor" />
+                <span>Powered by the Sprix Pace Engine</span>
+              </>
+            ) : (
+              <>
+                <Info className="w-3 h-3" />
+                <span>Sprix: Like "Prix" in Grand Prix</span>
+              </>
+            )}
           </div>
-        </div>
 
         {/* CONTROLS */}
         <section className={`${theme.boxBg} border ${theme.boxBorder} rounded-2xl p-3 sm:p-6 shadow-2xl space-y-6 relative overflow-hidden`}>
