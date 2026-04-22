@@ -198,6 +198,7 @@ function App() {
               </>
             )}
           </div>
+         </div> 
 
         {/* CONTROLS */}
         <section className={`${theme.boxBg} border ${theme.boxBorder} rounded-2xl p-3 sm:p-6 shadow-2xl space-y-6 relative overflow-hidden`}>
