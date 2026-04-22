@@ -18,6 +18,9 @@ function App() {
     border: isStriders ? 'border-[#009448]' : 'border-red-600',
     focusBorder: isStriders ? 'focus:border-[#009448]' : 'focus:border-red-500',
     bgLight: isStriders ? 'bg-[#009448]/20' : 'bg-red-500/20',
+    // New Striders Blue for the main box
+    boxBg: isStriders ? 'bg-[#043980]/30' : 'bg-slate-900',
+    boxBorder: isStriders ? 'border-[#043980]/50' : 'border-slate-800',
   };
 
   // --- State ---
@@ -169,8 +172,17 @@ function App() {
           </h1>
           
           <p className="text-slate-400 max-w-md mx-auto text-lg leading-relaxed">
-            The free <strong className="text-slate-200 font-semibold">Marathon Pace Calculator</strong> and <strong className="text-slate-200 font-semibold">Race Band Generator</strong>. 
-            Calculate negative splits, visualize your strategy, and print a waterproof wristband for race day.
+            {isStriders ? (
+              <>
+                The official Pace Calculator for the <strong className="text-slate-200 font-semibold">Manawatū Striders</strong>. 
+                Calculate negative splits, visualize your strategy, and print a waterproof wristband for race day.
+              </>
+            ) : (
+              <>
+                The free <strong className="text-slate-200 font-semibold">Marathon Pace Calculator</strong> and <strong className="text-slate-200 font-semibold">Race Band Generator</strong>. 
+                Calculate negative splits, visualize your strategy, and print a waterproof wristband for race day.
+              </>
+            )}
           </p>
 
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs text-slate-400 mt-2">
@@ -180,7 +192,7 @@ function App() {
         </div>
 
         {/* CONTROLS */}
-        <section className="bg-slate-900 border border-slate-800 rounded-2xl p-3 sm:p-6 shadow-2xl space-y-6 relative overflow-hidden">
+        <section className={`${theme.boxBg} border ${theme.boxBorder} rounded-2xl p-3 sm:p-6 shadow-2xl space-y-6 relative overflow-hidden`}>
           <div className="space-y-3 relative z-0">
             <label className="text-xs uppercase tracking-wider text-slate-500 font-semibold flex items-center gap-2">
               <Flag className="w-4 h-4" /> Race Distance
